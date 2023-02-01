@@ -1,15 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../controller/onboarding/onboarding_controller.dart';
 import '../../util/constants/app_color.dart';
 import '../../util/constants/app_pref.dart';
-import '../home/home_page.dart';
+import '../dashboard/DashboardPage.dart';
 
 class OnBoardingPage extends StatefulWidget {
   @override
@@ -103,7 +99,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   backgroundColor: AppColor.primaryAccent,
                   onPressed: () {
                     _controller.forwardAction();
-                    _controller.isLastPage ? Get.to(() => const HomePage()) : null;
+                    _controller.isLastPage ? Get.to(() => const DashboardPage()) : null;
                     _storeOnboardInfo();
                   },
                   child: Obx(() {
@@ -122,7 +118,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                 child: InkWell(
                     onTap: () {
                       _storeOnboardInfo();
-                      Get.to(() => const HomePage());
+                      Get.to(() => const DashboardPage());
                     },
                     child: Text('Skip'.toUpperCase(),
                         style: const TextStyle(

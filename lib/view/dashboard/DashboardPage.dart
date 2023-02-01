@@ -1,30 +1,25 @@
-import 'dart:io';
-
-import 'package:file_picker/file_picker.dart';
+import 'package:e_reader_app/view/home/upload_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:path_provider/path_provider.dart';
 
-import 'book_page.dart';
-
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class DashboardPage extends StatefulWidget {
+  const DashboardPage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<DashboardPage> createState() => _DashboardPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _DashboardPageState extends State<DashboardPage> {
   var currentIndex = 0;
   final pages = [
-    HomePage(),
-    Container(),
+    Center(),
+    UploadPage(),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
+        //backgroundColor: AppColors.pageBg,
         type: BottomNavigationBarType.fixed,
         currentIndex: currentIndex,
         //selectedItemColor: AppColors.primary,
@@ -32,11 +27,11 @@ class _HomePageState extends State<HomePage> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.house),
-            label: 'Home',
+            label: "Home",
           ),
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.upload_circle),
-            label: 'Upload',
+            icon: Icon(CupertinoIcons.cloud_upload),
+            label: "Upload",
           ),
         ],
       ),
