@@ -58,8 +58,9 @@ class UploadPage extends StatelessWidget {
   }
 
   Future<File> saveFile(PlatformFile file) async{
-    final appStorage = await getApplicationDocumentsDirectory();
-    final newFile = File('${appStorage.path}/${file.name}');
-    return File(file.path!).copy(newFile.path);
+    final appStorageDirectory = await getApplicationDocumentsDirectory();
+    final currentFile = File('${appStorageDirectory.path}/${file.name}');
+    return File(file.path!)
+        .copy(currentFile.path);
   }
 }
