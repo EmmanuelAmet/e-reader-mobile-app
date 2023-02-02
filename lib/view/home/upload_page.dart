@@ -8,6 +8,8 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'package:vocsy_epub_viewer/epub_viewer.dart';
+
 import '../../controller/note/book_controller.dart';
 
 class UploadPage extends StatelessWidget {
@@ -57,8 +59,9 @@ class UploadPage extends StatelessWidget {
   }
 
   Future<File> saveFile(PlatformFile file) async{
-    final appStorage = await getApplicationDocumentsDirectory();
-    final newFile = File('${appStorage.path}/${file.name}');
-    return File(file.path!).copy(newFile.path);
+    final appStorageDirectory = await getApplicationDocumentsDirectory();
+    final currentFile = File('${appStorageDirectory.path}/${file.name}');
+    return File(file.path!)
+        .copy(currentFile.path);
   }
 }
