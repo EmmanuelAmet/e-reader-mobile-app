@@ -136,11 +136,11 @@ class _HomePageState extends State<HomePage> {
       Expanded(
         child: TextButton.icon(
             label: const Text(
-              'View',
+              'Read',
               style: TextStyle(color: Colors.green),
             ),
             icon: const Icon(
-              CupertinoIcons.info,
+              CupertinoIcons.book,
               color: Colors.green,
             ),
             onPressed: () async{
