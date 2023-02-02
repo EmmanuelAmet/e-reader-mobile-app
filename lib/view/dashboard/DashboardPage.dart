@@ -1,3 +1,4 @@
+import 'package:e_reader_app/view/home/home_page.dart';
 import 'package:e_reader_app/view/home/upload_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPageState extends State<DashboardPage> {
   var currentIndex = 0;
   final pages = [
-    Center(),
+    HomePage(),
     UploadPage(),
   ];
   @override

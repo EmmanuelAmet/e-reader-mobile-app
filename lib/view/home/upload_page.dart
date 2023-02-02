@@ -1,21 +1,21 @@
 import 'dart:io';
 
-import 'package:e_reader_app/util/constants/app_color.dart';
+import 'package:e_reader_app/util/constants/assets_constants.dart';
+import 'package:e_reader_app/view/dashboard/DashboardPage.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:vocsy_epub_viewer/epub_viewer.dart';
+import '../../controller/note/book_controller.dart';
 import 'book_page.dart';
 
-class UploadPage extends StatefulWidget {
-  const UploadPage({Key? key}) : super(key: key);
+class UploadPage extends StatelessWidget {
+  UploadPage({Key? key}) : super(key: key);
+  //***** Dependency Injection
+  final bookController = Get.put(BookController());
 
-  @override
-  State<UploadPage> createState() => _UploadPageState();
-}
-
-class _UploadPageState extends State<UploadPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,24 +23,37 @@ class _UploadPageState extends State<UploadPage> {
         title: const Text("Home"),
       ),
       body: Center(
-        child: ElevatedButton(
-          child: const Text('Choose Epub'),
-          onPressed: () async{
-            final result = await FilePicker.platform.pickFiles(
-                allowMultiple: true,
-                type: FileType.custom,
-                allowedExtensions: ['epub']
-            );
-            if(result == null) return;
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Lottie.asset(AssetsConstants.upload,
+              height: 250.0,
+              width: 250.0
+            ),
+            ElevatedButton(
+              onPressed: () async{
+                final result = await FilePicker.platform.pickFiles(
+                    allowMultiple: false,
+                    type: FileType.custom,
+                    allowedExtensions: ['epub']
+                );
+                if(result == null) return;
 
-            final file = result.files.first;
+                final file = result.files.first;
 
-            final newFile = await saveFile(file);
-
-            openFiles(result.files);
-          },
+                final newFile = await saveFile(file);
+                bookController.addBook(file.name, newFile.path);
+                Get.to(DashboardPage());
+              },
+              child: Text(
+                "Choose epub file",
+                style: const TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.bold),
+              ),
+            )
+          ],
         ),
-      ),
+      )
     );
   }
 
@@ -51,15 +64,22 @@ class _UploadPageState extends State<UploadPage> {
 
   void openFile(PlatformFile file){
     VocsyEpub.setConfig(
-      themeColor: AppColor.primary,
-      identifier: "book",
+      themeColor: Colors.green,
+      identifier: "iosBook",
       scrollDirection: EpubScrollDirection.ALLDIRECTIONS,
-      allowSharing: false,
+      allowSharing: true,
       enableTts: true,
-      nightMode: false,
+      nightMode: true,
     );
 
-    VocsyEpub.open(file.path!);
+    // get current locator
+    VocsyEpub.locatorStream.listen((locator) {
+      print('LOCATOR: $locator');
+    });
+
+    VocsyEpub.open(
+      file.path!,
+    );
   }
 
   Future<File> saveFile(PlatformFile file) async{

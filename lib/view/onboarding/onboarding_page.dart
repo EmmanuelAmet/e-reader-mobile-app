@@ -18,11 +18,9 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
   final _controller = OnBoardingController();
   _storeOnboardInfo() async {
-    print("Shared pref called");
     int isViewed = 0;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setInt(appPref.onBoardingPref, isViewed);
-    print(prefs.getInt(appPref.onBoardingPref));
   }
 
   @override
