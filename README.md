@@ -42,8 +42,6 @@
 - [Flutter](https://flutter.dev/)
 - [Hive](https://github.com/hivedb/hive)
 
-![Screenshot](20230202_164913.gif)
-
 ### Features of the app:
       - Add epub file.
       - Read book (epub file).
