@@ -1,7 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:e_reader_app/view/home/search_book.dart';
 import 'package:e_reader_app/view/home/upload_page.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,10 +12,8 @@ import 'package:vocsy_epub_viewer/epub_viewer.dart';
 import '../../controller/home/home_controller.dart';
 import '../../model/book/book_model.dart';
 import '../../service/box.dart';
-import '../../util/constants/app_color.dart';
 import '../../util/constants/app_string_constants.dart';
 import '../../util/constants/assets_constants.dart';
-import 'book_page.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -192,19 +189,4 @@ class _HomePageState extends State<HomePage> {
       )
     ],
   );
-  void openFiles(List<PlatformFile> files) =>
-      Get.to(
-          BookPage(files: files, onOpenedFile: openFile)
-      );
-  void openFile(PlatformFile file){
-    VocsyEpub.setConfig(
-      themeColor: AppColor.primary,
-      identifier: "book",
-      scrollDirection: EpubScrollDirection.ALLDIRECTIONS,
-      allowSharing: false,
-      enableTts: true,
-      nightMode: false,
-    );
-    VocsyEpub.open(file.path!);
-  }
 }

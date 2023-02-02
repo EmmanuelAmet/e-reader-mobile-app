@@ -20,10 +20,8 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-        //backgroundColor: AppColors.pageBg,
         type: BottomNavigationBarType.fixed,
         currentIndex: currentIndex,
-        //selectedItemColor: AppColors.primary,
         onTap: (index) => setState(() => currentIndex = index),
         items: const [
           BottomNavigationBarItem(

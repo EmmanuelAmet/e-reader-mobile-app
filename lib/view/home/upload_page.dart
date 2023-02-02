@@ -9,7 +9,6 @@ import 'package:lottie/lottie.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:vocsy_epub_viewer/epub_viewer.dart';
 import '../../controller/note/book_controller.dart';
-import 'book_page.dart';
 
 class UploadPage extends StatelessWidget {
   UploadPage({Key? key}) : super(key: key);
@@ -43,7 +42,7 @@ class UploadPage extends StatelessWidget {
 
                 final newFile = await saveFile(file);
                 bookController.addBook(file.name, newFile.path);
-                Get.to(DashboardPage());
+                Get.offAll(() => DashboardPage());
               },
               child: Text(
                 "Choose epub file",
@@ -54,31 +53,6 @@ class UploadPage extends StatelessWidget {
           ],
         ),
       )
-    );
-  }
-
-  void openFiles(List<PlatformFile> files) =>
-      Get.to(
-          BookPage(files: files, onOpenedFile: openFile)
-      );
-
-  void openFile(PlatformFile file){
-    VocsyEpub.setConfig(
-      themeColor: Colors.green,
-      identifier: "iosBook",
-      scrollDirection: EpubScrollDirection.ALLDIRECTIONS,
-      allowSharing: true,
-      enableTts: true,
-      nightMode: true,
-    );
-
-    // get current locator
-    VocsyEpub.locatorStream.listen((locator) {
-      print('LOCATOR: $locator');
-    });
-
-    VocsyEpub.open(
-      file.path!,
     );
   }
 
