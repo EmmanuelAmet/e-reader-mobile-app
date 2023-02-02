@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:path_provider/path_provider.dart';
+
 import 'package:vocsy_epub_viewer/epub_viewer.dart';
 import '../../controller/note/book_controller.dart';
 
@@ -19,7 +20,7 @@ class UploadPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Home"),
+        title: const Text("Upload"),
       ),
       body: Center(
         child: Column(
